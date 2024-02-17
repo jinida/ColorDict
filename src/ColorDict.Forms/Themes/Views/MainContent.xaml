@@ -1,0 +1,23 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:views="clr-namespace:ColorDict.Forms.UI.Views"
+    xmlns:james="clr-namespace:Jamesnet.Wpf.Controls;assembly=Jamesnet.Wpf"
+    xmlns:edits="clr-namespace:ColorDict.Editor.UI.Views;assembly=ColorDict.Editor"
+    xmlns:layouts="clr-namespace:ColorDict.LayoutSupport.UI.Units;assembly=ColorDict.LayoutSupport">
+
+
+    <Style TargetType="{x:Type views:MainContent}">
+        <Setter Property="Background" Value="#1E1E1E"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type views:MainContent}">
+                    <Border Background="{TemplateBinding Background}"
+                            Padding="5 3 5 3">
+                        <edits:ColorEditor/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

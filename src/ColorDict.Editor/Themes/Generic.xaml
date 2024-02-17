@@ -1,0 +1,10 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/ColorDict.Editor;component/Themes/Views/ColorEditor.xaml"/>
+        <ResourceDictionary Source="/ColorDict.Editor;component/Themes/Units/PaletteBox.xaml"/>
+        <ResourceDictionary Source="/ColorDict.Editor;component/Themes/Units/PaletteBoxItem.xaml"/>
+        <ResourceDictionary Source="/ColorDict.Editor;component/Themes/Units/ColorMatrix.xaml"/>
+        <ResourceDictionary Source="/ColorDict.Editor;component/Themes/Units/ColorSlider.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>
