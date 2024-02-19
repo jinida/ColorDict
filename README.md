@@ -15,5 +15,9 @@ A collection of various WPF. Supports .NET 5 - 7 (WPF). Originally developed for
 - HistoryPallete: Palette for previous color storage
 - PixelWindow: Windows In-Screen Color Extractor
 
+# Demo
+![Demo](https://github.com/jinida/ColorDict/assets/68053155/050a6c54-da2e-42f4-ae5a-5a9afbda9b74)
+
+
 # TODO
  - Color Extractor - selection area average extractor
