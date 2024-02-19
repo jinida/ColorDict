@@ -2,6 +2,8 @@
 using ColorDict.Editor.UI.Views;
 using ColorDict.Forms.Local.ViewModels;
 using ColorDict.Forms.UI.Views;
+using ColorDict.Picker.Local.ViewModels;
+using ColorDict.Picker.UI.Views;
 using Jamesnet.Wpf.Global.Location;
 
 namespace ColorDict.Settings
@@ -11,7 +13,8 @@ namespace ColorDict.Settings
         protected override void Match(ViewModelLocatorCollection items)
         {
             items.Register<ColorWindow, ColorWindowViewModel>();
-            items.Register<ColorDict.Editor.UI.Views.ColorEditor, ColorEditorViewModel>();
+            items.Register<ColorEditor, ColorEditorViewModel>();
+            items.Register<PickerWindow, PickerViewModel>();
         }
     }
 }

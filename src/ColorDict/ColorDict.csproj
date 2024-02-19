@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ColorDict.Forms\ColorDict.Forms.csproj" />
+    <ProjectReference Include="..\ColorDict.Picker\ColorDict.Picker.csproj" />
   </ItemGroup>
 
 </Project>

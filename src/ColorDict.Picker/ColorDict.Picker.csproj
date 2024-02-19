@@ -13,8 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ColorDict.Core\ColorDict.Core.csproj" />
-    <ProjectReference Include="..\ColorDict.LayoutSupport\ColorDict.LayoutSupport.csproj" />
-    <ProjectReference Include="..\ColorDict.Picker\ColorDict.Picker.csproj" />
   </ItemGroup>
 
 </Project>

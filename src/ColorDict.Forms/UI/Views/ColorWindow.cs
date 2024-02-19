@@ -12,8 +12,6 @@ namespace ColorDict.Forms.UI.Views
         
         public ColorWindow()
         {
-            //Width = 500;
-            //Height = 300;
             SizeToContent = SizeToContent.WidthAndHeight;
             Title = "ColorDict";
             ResizeMode = ResizeMode.NoResize;

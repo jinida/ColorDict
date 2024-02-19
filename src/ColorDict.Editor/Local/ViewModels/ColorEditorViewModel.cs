@@ -1,11 +1,15 @@
 ﻿using ColorDict.Core.Config;
 using ColorDict.Core.Converters;
+using ColorDict.Core.Helpers;
 using ColorDict.Core.Models;
-using ColorPicker.Local.Worker;
+using ColorDict.Picker.Local.ViewModels;
+using ColorDict.Picker.UI.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Jamesnet.Wpf.Controls;
-using System.ComponentModel;
+using Prism.Ioc;
+using Prism.Regions;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
@@ -13,9 +17,9 @@ namespace ColorDict.Editor.Local.ViewModels
 {
     public partial class ColorEditorViewModel : ObservableObject, IViewLoadable
     {
-
-        private bool _isCaptureActivated;
-        private readonly PixelExtractWorker _captureWorker;
+        private readonly IRegionManager _regionManager;
+        private readonly IContainerProvider _containerProvider;
+        private readonly PickerManager _pickerManger;
 
         [ObservableProperty]
         private BitmapSource _captureImage;
@@ -25,12 +29,6 @@ namespace ColorDict.Editor.Local.ViewModels
 
         [ObservableProperty]
         private string _currentColor;
-
-        [ObservableProperty]
-        private string _reverseColor;
-
-        [ObservableProperty]
-        private string _contrastColor;
 
         [ObservableProperty]
         private int _red;
@@ -53,15 +51,12 @@ namespace ColorDict.Editor.Local.ViewModels
         [ObservableProperty]
         public int _alpha = 255;
 
-        public ColorEditorViewModel()
+        public ColorEditorViewModel(IRegionManager regionManager, IContainerProvider containerProvider, PickerManager pickerManager)
         {
+            _regionManager = regionManager;
+            _containerProvider = containerProvider;
+            _pickerManger = pickerManager;
             ExtractedColorSet = new ExtractedColorCollection();
-
-            _captureWorker = new PixelExtractWorker
-            {
-                StartExtract = ExtractColor,
-                FinishExtract = () => IsColorCapturing = false
-            };
 
             ColorStruct color = ConvertColor.Parse("#ffffffff");
 
@@ -111,8 +106,25 @@ namespace ColorDict.Editor.Local.ViewModels
         [RelayCommand]
         private void Capture(object obj)
         {
-            IsColorCapturing = true;
-            _captureWorker.Begin();
+            _ = _pickerManger.ResolveWindow<PickerWindow>();
+            _pickerManger.ShowPicker();
+            _pickerManger.windowHidden += _pickerManger_windowHidden;
+        }
+
+        private void _pickerManger_windowHidden(object? sender, EventArgs e)
+        {
+            PickerWindow window = _pickerManger.ResolveWindow<PickerWindow>();
+            PickerViewModel pickerViewModel = (PickerViewModel)window.DataContext;
+            if (pickerViewModel.SaveColor)
+            {
+                Color color = pickerViewModel.CurrentColor;
+                _red = color.R;
+                _green = color.G;
+                _blue = color.B;
+                ExtractColor(new ColorStruct(color));
+                OnPropertyChanged("Red"); OnPropertyChanged("Green"); OnPropertyChanged("Blue");
+            }
+            _pickerManger.windowHidden -= _pickerManger_windowHidden;
         }
 
         [RelayCommand]
@@ -126,16 +138,12 @@ namespace ColorDict.Editor.Local.ViewModels
 
         private void ExtractColor(ColorStruct rgba)
         {
-            _isCaptureActivated = true;
             CurrentColor = ConvertColor.Hex(rgba);
-            ReverseColor = ConvertColor.ReverseHex(rgba);
-            ContrastColor = ConvertColor.Contrast(rgba);
 
             Red = rgba.Red;
             Green = rgba.Green;
             Blue = rgba.Blue;
             ExtractedColorSet.Insert(rgba);
-            _isCaptureActivated = false;
 
             var hsvTuple = ColorSpacecConverter.RgbToHsv(Red, Green, Blue);
             Hue = (int)hsvTuple.Item1;
@@ -180,6 +188,7 @@ namespace ColorDict.Editor.Local.ViewModels
             _green = (int)(rgbTuple.Item2 * 255);
             _blue = (int)(rgbTuple.Item3 * 255);
             OnPropertyChanged("Red"); OnPropertyChanged("Green"); OnPropertyChanged("Blue");
+            ApplyCurrentColor();
         }
 
         private void ApplyHsv()
@@ -189,6 +198,12 @@ namespace ColorDict.Editor.Local.ViewModels
             _saturation = (int)hsvTuple.Item2;
             _value = (int)hsvTuple.Item3;
             OnPropertyChanged("Hue"); OnPropertyChanged("Saturation"); OnPropertyChanged("Value");
+            ApplyCurrentColor();
+        }
+
+        private void ApplyCurrentColor()
+        {
+            CurrentColor = ConvertColor.Hex(new ColorStruct(Red, Green, Blue, Alpha));
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using ColorDict.Core.Converters;
-using ColorDict.Core.Models;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -96,7 +95,6 @@ namespace ColorDict.Editor.UI.Units
                 RaisePropertyChanged(nameof(RangeY));
             }
         }
-
 
         private void RecalculateGradient()
         {

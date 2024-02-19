@@ -6,7 +6,10 @@ namespace ColorDict.Core.Models
     {
         public void Insert(ColorStruct rgba)
         {
-            Insert(0, new ColorStampModel(rgba));
+            if (this.FirstOrDefault(x => x.HexColor == ConvertColor.Hex(rgba)) is null)
+            {
+                Insert(0, new ColorStampModel(rgba));
+            }
             RemoveLast();
         }
 

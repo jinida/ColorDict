@@ -3,10 +3,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:edits="clr-namespace:ColorDict.Editor.UI.Views"
     xmlns:units="clr-namespace:ColorDict.Editor.UI.Units"
-    xmlns:layouts="clr-namespace:ColorDict.LayoutSupport.UI.Units;assembly=ColorDict.LayoutSupport">
+    xmlns:layouts="clr-namespace:ColorDict.LayoutSupport.UI.Units;assembly=ColorDict.LayoutSupport"
+    xmlns:converters="clr-namespace:ColorDict.Core.Converters;assembly=ColorDict.Core">
 
     <Geometry x:Key="PickerIcon">M19.35,11.72L17.22,13.85L15.81,12.43L8.1,20.14L3.5,22L2,20.5L3.86,15.9L11.57,8.19L10.15,6.78L12.28,4.65L19.35,11.72M16.76,3C17.93,1.83 19.83,1.83 21,3C22.17,4.17 22.17,6.07 21,7.24L19.08,9.16L14.84,4.92L16.76,3M5.56,17.03L4.5,19.5L6.97,18.44L14.4,11L13,9.6L5.56,17.03Z</Geometry>
     <Geometry x:Key="ClipBoardIcon">M4 7V21H18V23H4C2.9 23 2 22.1 2 21V7H4M20 3C21.1 3 22 3.9 22 5V17C22 18.1 21.1 19 20 19H8C6.9 19 6 18.1 6 17V5C6 3.9 6.9 3 8 3H11.18C11.6 1.84 12.7 1 14 1C15.3 1 16.4 1.84 16.82 3H20M14 3C13.45 3 13 3.45 13 4C13 4.55 13.45 5 14 5C14.55 5 15 4.55 15 4C15 3.45 14.55 3 14 3M10 7V5H8V17H20V5H18V7H10Z</Geometry>
+    <converters:RgbCombineConverter x:Key="RgbCombineConverter"/>
 
     <Style TargetType="{x:Type edits:ColorEditor}">
         <Setter Property="Background" Value="#1E1E1E"/>
@@ -15,14 +17,17 @@
                 <ControlTemplate TargetType="{x:Type edits:ColorEditor}">
                     <StackPanel>
                         <StackPanel x:Name="picks" Orientation="Horizontal" Margin="8 0 8 0">
-                            <ComboBox Margin="5 4 5 4" Height="30" Width="160" VerticalContentAlignment="Center">
-                                <ComboBoxItem>1</ComboBoxItem>
-                                <ComboBoxItem>2</ComboBoxItem>
+                            <ComboBox Margin="5 4 5 4" 
+                                      Height="30"
+                                      Width="160" 
+                                      VerticalContentAlignment="Center"
+                                      SelectedIndex="0">
+                                <ComboBoxItem>Point Extractor</ComboBoxItem>
                             </ComboBox>
 
                             <Button Margin="8 8 4 8" 
                                     Padding="10 0" 
-                                    Command="{Binding CaptureCommand}" 
+                                    Command="{Binding CaptureCommand}"
                                     Cursor="Hand">
                                 <Path Width="16"
                                       Height="16"
@@ -39,7 +44,7 @@
                                 <Path Width="16" Height="16" Stretch="Fill" Fill="Black" Data="{StaticResource ClipBoardIcon}"/>
                             </Button>
 
-                            <Viewbox Margin="4 8 4 8">
+                            <Viewbox Margin="8 8 8 8">
                                 <Rectangle Width="40" 
                                            Height="40" 
                                            Stretch="Fill" 
@@ -49,28 +54,37 @@
                             </Viewbox>
 
                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBox Text="RGB(000, 000, 000)" FontSize="12" Foreground="White" IsReadOnly="True" Background="Transparent" BorderBrush="Transparent"/>
-                                <TextBox Text="{Binding CurrentColor}" TextAlignment="Center" FontSize="12" Foreground="White" IsReadOnly="True" Background="Transparent" BorderBrush="Transparent"/>
+                                <TextBox FontSize="13" 
+                                         Foreground="White" 
+                                         IsReadOnly="True" 
+                                         Background="Transparent" 
+                                         BorderBrush="Transparent">
+                                    <TextBox.Text>
+                                        <MultiBinding Converter="{StaticResource RgbCombineConverter}">
+                                            <Binding Path="Red"/>
+                                            <Binding Path="Blue"/>
+                                            <Binding Path="Green"/>
+                                        </MultiBinding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBox Text="{Binding CurrentColor}" 
+                                         TextAlignment="Center" 
+                                         FontSize="13" 
+                                         Foreground="White" 
+                                         IsReadOnly="True" 
+                                         Background="Transparent" 
+                                         BorderBrush="Transparent"/>
                             </StackPanel>
 
-                            <layouts:ExpandButton x:Name="expand" Margin="8 0 0 0"/>
+                            <layouts:ExpandButton x:Name="expand" Margin="4 0 0 0"/>
                         </StackPanel>
                         <Grid x:Name="edits">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                            </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-
 
                             <units:ColorMatrix Grid.RowSpan="6" 
                                                Width="175" 
@@ -100,6 +114,7 @@
                                               Margin="0 0 0 20"/>
                         </Grid>
                     </StackPanel>
+                    
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding ElementName=expand, Path=IsChecked}" Value="True">
                             <Setter TargetName="edits" Property="Visibility" Value="Collapsed"/>

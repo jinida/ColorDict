@@ -3,15 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34526.213
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorDict", "ColorDict\ColorDict.csproj", "{754E7D06-3BA7-42E9-8CA0-A84D61EEE4D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorDict", "ColorDict\ColorDict.csproj", "{754E7D06-3BA7-42E9-8CA0-A84D61EEE4D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorDict.Forms", "ColorDict.Forms\ColorDict.Forms.csproj", "{661F0058-F799-47EC-9E9E-6715B7619F96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorDict.Forms", "ColorDict.Forms\ColorDict.Forms.csproj", "{661F0058-F799-47EC-9E9E-6715B7619F96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorDict.LayoutSupport", "ColorDict.LayoutSupport\ColorDict.LayoutSupport.csproj", "{C8EB4FA9-1BCD-4919-9823-BC4C412BBB4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorDict.LayoutSupport", "ColorDict.LayoutSupport\ColorDict.LayoutSupport.csproj", "{C8EB4FA9-1BCD-4919-9823-BC4C412BBB4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorDict.Editor", "ColorDict.Editor\ColorDict.Editor.csproj", "{84805655-0A8A-4667-8C4C-1C570CB8BA80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorDict.Editor", "ColorDict.Editor\ColorDict.Editor.csproj", "{84805655-0A8A-4667-8C4C-1C570CB8BA80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorDict.Core", "ColorDict.Core\ColorDict.Core.csproj", "{5E7E23A4-59D1-4D28-8415-528C6EA71B10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorDict.Core", "ColorDict.Core\ColorDict.Core.csproj", "{5E7E23A4-59D1-4D28-8415-528C6EA71B10}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorDict.Picker", "ColorDict.Picker\ColorDict.Picker.csproj", "{EBD620D0-54CC-4BE0-9775-3194E48D772E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Base", "Base", "{0B902E83-C5D9-4680-A495-28F4997D5D64}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Foundation", "Foundation", "{DAA6DFA8-B3BD-425E-8463-50F90F19ED1C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Studio", "Studio", "{3863D33E-1AEE-414C-84E2-004E2DB58C5E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Partial", "Partial", "{C5DF989C-9D21-4C74-A41B-AA31985DC5B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +49,21 @@ Global
 		{5E7E23A4-59D1-4D28-8415-528C6EA71B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E7E23A4-59D1-4D28-8415-528C6EA71B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E7E23A4-59D1-4D28-8415-528C6EA71B10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBD620D0-54CC-4BE0-9775-3194E48D772E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBD620D0-54CC-4BE0-9775-3194E48D772E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBD620D0-54CC-4BE0-9775-3194E48D772E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBD620D0-54CC-4BE0-9775-3194E48D772E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{754E7D06-3BA7-42E9-8CA0-A84D61EEE4D4} = {3863D33E-1AEE-414C-84E2-004E2DB58C5E}
+		{661F0058-F799-47EC-9E9E-6715B7619F96} = {C5DF989C-9D21-4C74-A41B-AA31985DC5B5}
+		{C8EB4FA9-1BCD-4919-9823-BC4C412BBB4F} = {DAA6DFA8-B3BD-425E-8463-50F90F19ED1C}
+		{84805655-0A8A-4667-8C4C-1C570CB8BA80} = {C5DF989C-9D21-4C74-A41B-AA31985DC5B5}
+		{5E7E23A4-59D1-4D28-8415-528C6EA71B10} = {0B902E83-C5D9-4680-A495-28F4997D5D64}
+		{EBD620D0-54CC-4BE0-9775-3194E48D772E} = {C5DF989C-9D21-4C74-A41B-AA31985DC5B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {569BC33C-F67C-4ABA-8272-8856BFC1FF51}

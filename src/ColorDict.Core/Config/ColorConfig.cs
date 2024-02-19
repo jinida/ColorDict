@@ -40,8 +40,8 @@ namespace ColorDict.Core.Config
 
         public static void SaveSpoidColor(string color)
         {
-            Config.SpoidColor = color;
-            SaveConfig(Config);
+            //Config.SpoidColor = color;
+            //SaveConfig(Config);
         }
 
         public static ConfigModel LoadConfig()
