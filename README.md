@@ -6,7 +6,7 @@ A collection of various WPF. Supports .NET 5 - 7 (WPF). Originally developed for
 ![image](https://github.com/jinida/ColorDict/assets/68053155/42de777a-7b51-4b8d-9042-070447666881)
 
 # Environment
--  WPF .NET Core 7.0
+- WPF .NET Core 7.0
 - Visual Studio 2022 Preview
 
 # Included Controls
@@ -21,3 +21,4 @@ A collection of various WPF. Supports .NET 5 - 7 (WPF). Originally developed for
 
 # TODO
  - Color Extractor - selection area average extractor
+ - Save Config(History)
